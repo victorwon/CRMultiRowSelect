@@ -49,7 +49,7 @@
 @synthesize renderedMark = _renderedMark;
 
 - (void)drawRect:(CGRect)rect
-{    
+{
     _isSelected = NO;
     
     CGFloat posY = (rect.size.height/2) - kCircleRadioUnselected/2;
@@ -88,20 +88,27 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        label = [[UILabel alloc] initWithFrame:CGRectMake(kMarkCell, .0, self.frame.size.width - kMarkCell, self.frame.size.height)];
-        label.textColor = [UIColor blackColor];
-        label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
-        label.textAlignment = UITextAlignmentLeft;
-        label.backgroundColor = [UIColor clearColor];
-        [self.contentView addSubview:label];
-        
-        imageView = [UIImageView new];
-        [self.contentView addSubview:imageView];
-        
-        _renderedMark = [self renderMark];
+        [self awakeFromNib];
     }
     return self;
 }
+
+- (void)awakeFromNib
+{
+    label = [[UILabel alloc] initWithFrame:CGRectMake(kMarkCell, .0, self.frame.size.width - kMarkCell, self.frame.size.height)];
+    label.textColor = [UIColor blackColor];
+    label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
+    label.textAlignment = UITextAlignmentLeft;
+    label.backgroundColor = [UIColor clearColor];
+    [self.contentView addSubview:label];
+    
+    imageView = [UIImageView new];
+    [self.contentView addSubview:imageView];
+    
+    _renderedMark = [self renderMark];
+}
+
+
 
 #pragma mark - Properties
 - (void)setIsSelected:(BOOL)isSelected
